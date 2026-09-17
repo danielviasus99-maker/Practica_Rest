@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Gimnasio</title>
+</head>
+<body>
+
+    <h1>Gestión de Gimnasio</h1>
+
+    <div id="lista-maquinas">
+        <p>Cargando datos de la API...</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cambia '/api/gimnasios/' por la ruta exacta que registraste en el router (ej. '/api/ejercicios/')
+            fetch('/api/gimnasios/')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la respuesta del servidor');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    let contenedor = document.getElementById('lista-maquinas');
+                    contenedor.innerHTML = ''; // Limpiar mensaje de carga
+
+                    if (data.length === 0) {
+                        contenedor.innerHTML = '<p>No hay registros disponibles.</p>';
+                        return;
+                    }
+
+                    // Recorrer los datos devueltos por la API
+                    data.forEach(item => {
+                        contenedor.innerHTML += `
+                            <div style="border: 1px solid #ccc; margin: 10px; padding: 10px; border-radius: 5px;">
+                                <h3>${item.nombre || item.nombre_gimnasio}</h3>
+                                <p><strong>Detalle:</strong> ${item.direccion || item.estado || 'Sin información'}</p>
+                            </div>
+                        `;
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al conectar con la API:', error);
+                    document.getElementById('lista-maquinas').innerHTML = '<p style="color: red;">Error al cargar los datos desde la API.</p>';
+                });
+        });
+    </script>
+</body>
+</html>
