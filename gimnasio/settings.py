@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'maquina',
     'gimnasioapp.apps.GimnasioappConfig',
+    'drf_spectacular',
 ]
 # proyecto_gimnasio/settings.py
 
@@ -133,5 +135,10 @@ MAILERS = {
 
 # Configuración del modelo de usuario ORM personalizado para el sistema del gimnasio
 AUTH_USER_MODEL = 'gimnasioapp.Usuario'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
 
 
