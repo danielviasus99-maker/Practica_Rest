@@ -37,3 +37,7 @@ class SesionEntrenamientoSerializer(serializers.ModelSerializer):
     class Meta:
         model = SesionEntrenamiento
         fields = '__all__'
+
+
+
+

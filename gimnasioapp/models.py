@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 class Gimnasio(models.Model):
     id_gimnasio = models.AutoField(primary_key=True)
@@ -8,17 +9,16 @@ class Gimnasio(models.Model):
     def __str__(self):
         return self.nombre_gym
 
-
-class Usuario(models.Model):
-    id_usuario = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=100)
-    apellido = models.CharField(max_length=100)
-    correo = models.EmailField(unique=True)
+class Usuario(AbstractUser):
+    # tus campos personalizados...
     telefono = models.CharField(max_length=20, blank=True, null=True)
+    direccion = models.CharField(max_length=255, blank=True, null=True)
+    rol = models.CharField(max_length=50, default='cliente')
     fecha_nacimiento = models.DateField(blank=True, null=True)
 
-    def __str__(self):
-        return self.nombre
+    REQUIRED_FIELDS = ['email', 'telefono']
+
+
 
 
 class Ejercicio(models.Model):
@@ -80,3 +80,5 @@ class SesionEntrenamiento(models.Model):
 
     def __str__(self):
         return f"Sesion {self.id_sesion} ({self.get_estado_display()})"
+
+

@@ -1,11 +1,8 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework import viewsets
-
-def home(request):
-    return render(request, 'home.html')
-def vista_maquinas(request):
-    return render(request, 'maquinas_list.html')
-
+from .models import Rutina, Usuario
+from .serializers import RutinaSerializer, UsuarioSerializer
 from .models import (
     Gimnasio, 
     Usuario, 
@@ -22,6 +19,11 @@ from .serializers import (
     DetalleRutinaSerializer, 
     SesionEntrenamientoSerializer
 )
+
+def home(request):
+    return render(request, 'home.html')
+def vista_maquinas(request):
+    return render(request, 'maquinas_list.html')
 
 class GimnasioViewSet(viewsets.ModelViewSet):
     queryset = Gimnasio.objects.all()
@@ -46,3 +48,5 @@ class DetalleRutinaViewSet(viewsets.ModelViewSet):
 class SesionEntrenamientoViewSet(viewsets.ModelViewSet):
     queryset = SesionEntrenamiento.objects.all()
     serializer_class = SesionEntrenamientoSerializer
+
+

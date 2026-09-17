@@ -132,3 +132,13 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+# Configuración del modelo de usuario ORM personalizado para el sistema del gimnasio
+AUTH_USER_MODEL = 'gimnasioapp.Usuario'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+
